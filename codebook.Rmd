@@ -1,0 +1,128 @@
+---
+title: "Assign"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Feature Selection 
+=================
+
+Prework: Dowload, unzip and read files--> Check files on working directory, if files are not in place they will be downloaded / unzipped. Files will also be imported in R:
+
+  Subject_train <- subject_train.txt"
+  Subject_test <- subject_test.txt"
+  
+  X_train <- X_train.txt"
+  X_test <- X_test.txt"
+  
+  Y_train <- y_train.txt"
+  Y_test <- y_test.txt"
+
+  features <- features.txt"
+
+  activityLabels <- activity_labels.txt"
+  
+  
+  
+1 Merges the training and the test sets to create one data set--> Data will be merged to one big dataset
+
+  Merging of rows
+    Subject_merged Variable   = "Subject"
+    Y_merged Variable         = "Activity"
+    features Variable         = "Feature_name"
+  
+    X_merged Variables        = Values of features (Feature_name)
+
+  Merging of colums to one big dataset named "Data_total"
+
+2 Extracts only the measurements on the mean and standard deviation for each measurement.
+
+  Select only feature names containing mean() or std (), the use the names to select subset of relevant data:
+  
+3 Uses descriptive activity names to name the activities in the data set
+  
+  1 <- "Walking"
+  2 <- "Walking Upstairs"
+  3 <- "Walking Downstairs"
+  4 <- "Sitting"
+  5 <- "Standing"
+  6 <- "Laying"
+
+4 Appropriately labels the data set with descriptive variable names, results in:
+
+   [1] "Subject"                                                       
+   [2] "Activity"                                                      
+   [3] "Time_BodyAccelerometer_Mean_X"                                 
+   [4] "Time_BodyAccelerometer_Mean_Y"                                 
+   [5] "Time_BodyAccelerometer_Mean_Z"                                 
+   [6] "Time_BodyAccelerometer_StandardDeviation_X"                    
+   [7] "Time_BodyAccelerometer_StandardDeviation_Y"                    
+   [8] "Time_BodyAccelerometer_StandardDeviation_Z"                    
+   [9] "Time_GravityAccelerometer_Mean_X"                              
+  [10] "Time_GravityAccelerometer_Mean_Y"                              
+  [11] "Time_GravityAccelerometer_Mean_Z"                              
+  [12] "Time_GravityAccelerometer_StandardDeviation_X"                 
+  [13] "Time_GravityAccelerometer_StandardDeviation_Y"                 
+  [14] "Time_GravityAccelerometer_StandardDeviation_Z"                 
+  [15] "Time_BodyAccelerometer_Jerk_Mean_X"                            
+  [16] "Time_BodyAccelerometer_Jerk_Mean_Y"                            
+  [17] "Time_BodyAccelerometer_Jerk_Mean_Z"                            
+  [18] "Time_BodyAccelerometer_Jerk_StandardDeviation_X"               
+  [19] "Time_BodyAccelerometer_Jerk_StandardDeviation_Y"               
+  [20] "Time_BodyAccelerometer_Jerk_StandardDeviation_Z"               
+  [21] "Time_BodyGyroscope_Mean_X"                                     
+  [22] "Time_BodyGyroscope_Mean_Y"                                     
+  [23] "Time_BodyGyroscope_Mean_Z"                                     
+  [24] "Time_BodyGyroscope_StandardDeviation_X"                        
+  [25] "Time_BodyGyroscope_StandardDeviation_Y"                        
+  [26] "Time_BodyGyroscope_StandardDeviation_Z"                        
+  [27] "Time_BodyGyroscope_Jerk_Mean_X"                                
+  [28] "Time_BodyGyroscope_Jerk_Mean_Y"                                
+  [29] "Time_BodyGyroscope_Jerk_Mean_Z"                                
+  [30] "Time_BodyGyroscope_Jerk_StandardDeviation_X"                   
+  [31] "Time_BodyGyroscope_Jerk_StandardDeviation_Y"                   
+  [32] "Time_BodyGyroscope_Jerk_StandardDeviation_Z"                   
+  [33] "Time_BodyAccelerometer_Magnitude_Mean_"                        
+  [34] "Time_BodyAccelerometer_Magnitude_StandardDeviation_"           
+  [35] "Time_GravityAccelerometer_Magnitude_Mean_"                     
+  [36] "Time_GravityAccelerometer_Magnitude_StandardDeviation_"        
+  [37] "Time_BodyAccelerometer_Jerk_Magnitude_Mean_"                   
+  [38] "Time_BodyAccelerometer_Jerk_Magnitude_StandardDeviation_"      
+  [39] "Time_BodyGyroscope_Magnitude_Mean_"                            
+  [40] "Time_BodyGyroscope_Magnitude_StandardDeviation_"               
+  [41] "Time_BodyGyroscope_Jerk_Magnitude_Mean_"                       
+  [42] "Time_BodyGyroscope_Jerk_Magnitude_StandardDeviation_"          
+  [43] "Frequency_BodyAccelerometer_Mean_X"                            
+  [44] "Frequency_BodyAccelerometer_Mean_Y"                            
+  [45] "Frequency_BodyAccelerometer_Mean_Z"                            
+  [46] "Frequency_BodyAccelerometer_StandardDeviation_X"               
+  [47] "Frequency_BodyAccelerometer_StandardDeviation_Y"               
+  [48] "Frequency_BodyAccelerometer_StandardDeviation_Z"               
+  [49] "Frequency_BodyAccelerometer_Jerk_Mean_X"                       
+  [50] "Frequency_BodyAccelerometer_Jerk_Mean_Y"                       
+  [51] "Frequency_BodyAccelerometer_Jerk_Mean_Z"                       
+  [52] "Frequency_BodyAccelerometer_Jerk_StandardDeviation_X"          
+  [53] "Frequency_BodyAccelerometer_Jerk_StandardDeviation_Y"          
+  [54] "Frequency_BodyAccelerometer_Jerk_StandardDeviation_Z"          
+  [55] "Frequency_BodyGyroscope_Mean_X"                                
+  [56] "Frequency_BodyGyroscope_Mean_Y"                                
+  [57] "Frequency_BodyGyroscope_Mean_Z"                                
+  [58] "Frequency_BodyGyroscope_StandardDeviation_X"                   
+  [59] "Frequency_BodyGyroscope_StandardDeviation_Y"                   
+  [60] "Frequency_BodyGyroscope_StandardDeviation_Z"                   
+  [61] "Frequency_BodyAccelerometer_Magnitude_Mean_"                   
+  [62] "Frequency_BodyAccelerometer_Magnitude_StandardDeviation_"      
+  [63] "Frequency_Body_Accelerometer_Jerk_Magnitude_Mean_"             
+  [64] "Frequency_Body_Accelerometer_Jerk_Magnitude_StandardDeviation_"
+  [65] "Frequency_Body_Gyroscope_Magnitude_Mean_"                      
+  [66] "Frequency_Body_Gyroscope_Magnitude_StandardDeviation_"         
+  [67] "Frequency_Body_Gyroscope_Jerk_Magnitude_Mean_"                 
+  [68] "Frequency_Body_Gyroscope_Jerk_Magnitude_StandardDeviation_"   
+
+5 From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject:
+  Grouped by Subject and Activity with mean calculation where file is exported as"TidyData.txt
+
+
